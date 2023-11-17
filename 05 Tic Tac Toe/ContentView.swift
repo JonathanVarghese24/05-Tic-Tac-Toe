@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var moves = Array(repeating: "", count: 9)
     @State private var xTurn = true
+    @State private var gameOver = false
+    @State private var winMessage = ""
     var body: some View {
         VStack {
             
@@ -44,7 +46,20 @@ struct ContentView: View {
             }
             
             .preferredColorScheme(.dark)
+            .alert(isPresented: $gameOver) {
+                Alert(title: Text(winMessage))
+            }
+            .onChange(of: moves) { newValue in
+                checkForWinner()
+            }
             .padding()
+        }
+    }
+    
+    private func checkForWinner(){
+        if moves[0] != ""  && moves[0] == moves[1] && moves[1] == moves[2] {
+            winMessage = "\(moves[0]) is the winner!"
+            gameOver = true
         }
     }
 }
