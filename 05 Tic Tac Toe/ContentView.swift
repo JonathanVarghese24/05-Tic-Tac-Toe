@@ -71,7 +71,10 @@ struct ContentView: View {
         checkLine(a: 2, b: 4, c: 6)
         checkLine(a: 0, b: 3, c: 6)
         checkLine(a: 1, b: 4, c: 7)
-
+        if !(gameOver || moves.contains("")){
+            winMessage = "Cat's Game!"
+            gameOver = true
+        }
 
         }
     
